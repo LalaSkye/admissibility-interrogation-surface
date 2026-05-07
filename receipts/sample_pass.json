@@ -1,0 +1,17 @@
+{
+  "schema": "pre-decision-denial-receipt-v1",
+  "run_id": "00000000-0000-0000-0000-000000000001",
+  "scenario": "all_pass",
+  "timestamp": "2026-05-07T05:00:00+00:00",
+  "result": "PASS",
+  "decision_record_created": false,
+  "halt_at_question": null,
+  "evaluations": [
+    {"question_number": 1, "question": "authority_present",        "status": "SATISFIED"},
+    {"question_number": 2, "question": "scope_bounded",            "status": "SATISFIED"},
+    {"question_number": 3, "question": "evidence_admissible",      "status": "SATISFIED"},
+    {"question_number": 4, "question": "state_lineage_intact",     "status": "SATISFIED"},
+    {"question_number": 5, "question": "outcome_lawful_at_commit", "status": "SATISFIED"}
+  ],
+  "sha256": "placeholder-regenerate-with-replay-verifier"
+}

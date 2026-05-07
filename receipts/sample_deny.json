@@ -1,0 +1,14 @@
+{
+  "schema": "pre-decision-denial-receipt-v1",
+  "run_id": "00000000-0000-0000-0000-000000000002",
+  "scenario": "fail_scope",
+  "timestamp": "2026-05-07T05:00:00+00:00",
+  "result": "PRE_DECISION_DENIAL",
+  "decision_record_created": false,
+  "halt_at_question": 2,
+  "evaluations": [
+    {"question_number": 1, "question": "authority_present", "status": "SATISFIED"},
+    {"question_number": 2, "question": "scope_bounded",     "status": "UNSATISFIED"}
+  ],
+  "sha256": "placeholder-regenerate-with-replay-verifier"
+}

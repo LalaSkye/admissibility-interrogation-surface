@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PreDecisionDenialReceipt",
+  "description": "Receipt emitted when the admissibility interrogation chain halts before a DecisionRecord is formed.",
+  "type": "object",
+  "required": [
+    "schema",
+    "run_id",
+    "scenario",
+    "timestamp",
+    "result",
+    "decision_record_created",
+    "halt_at_question",
+    "evaluations",
+    "sha256"
+  ],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "const": "pre-decision-denial-receipt-v1"
+    },
+    "run_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this interrogation run."
+    },
+    "scenario": {
+      "type": "string",
+      "description": "The scenario name used for this run."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp of the interrogation run."
+    },
+    "result": {
+      "type": "string",
+      "enum": ["PASS", "PRE_DECISION_DENIAL"],
+      "description": "PASS: all questions satisfied, DecisionRecord formation permitted. PRE_DECISION_DENIAL: chain halted, no DecisionRecord created."
+    },
+    "decision_record_created": {
+      "type": "boolean",
+      "description": "Must be false when result is PRE_DECISION_DENIAL."
+    },
+    "halt_at_question": {
+      "oneOf": [
+        { "type": "integer", "minimum": 1, "maximum": 5 },
+        { "type": "null" }
+      ],
+      "description": "Question number at which the chain halted. Null if all questions were satisfied."
+    },
+    "evaluations": {
+      "type": "array",
+      "description": "Ordered list of question evaluations. Stops at the first UNSATISFIED.",
+      "items": {
+        "type": "object",
+        "required": ["question_number", "question", "status"],
+        "properties": {
+          "question_number": { "type": "integer", "minimum": 1 },
+          "question": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["SATISFIED", "UNSATISFIED"]
+          }
+        }
+      }
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA256 hash of the receipt content (excluding this field) for integrity verification."
+    }
+  },
+  "additionalProperties": false
+}
